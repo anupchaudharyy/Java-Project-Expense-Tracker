@@ -1,0 +1,29 @@
+2025-09-02 01:49:18,732 - INFO - Ollama server started on localhost:5000
+2025-09-02 01:49:55,714 - INFO - Connection from ('127.0.0.1', 64369)
+2025-09-02 01:49:55,715 - INFO - Received from ('127.0.0.1', 64369): {"description":"You are a business expense analyst. Here are the expenses to analyze:\n\n- both onli...
+2025-09-02 01:49:55,715 - INFO - Attempting to get prediction for description: You are a business expense analyst. Here are the expenses to analyze:
+
+- both online and offline mar...
+2025-09-02 01:49:55,715 - INFO - Using model: llama3.2:latest
+2025-09-02 01:49:55,715 - INFO - Sending request to Ollama
+2025-09-02 01:50:01,770 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-09-02 01:50:01,772 - INFO - Received response from Ollama
+2025-09-02 01:50:01,772 - INFO - AI Response: **Expense Analysis Report**
+
+**Summary of Spending Patterns:**
+The analyzed expenses show a mix of marketing, travel, office-related costs, and operational expenditures. Notably, the majority of expen...
+2025-09-02 01:50:01,772 - INFO - Sent response to ('127.0.0.1', 64369)
+2025-09-02 01:50:31,776 - INFO - Connection from ('127.0.0.1', 64376)
+2025-09-02 01:50:31,777 - INFO - Received from ('127.0.0.1', 64376): {"description":"You are a business expense analyst. Here are the expenses to analyze:\n\n- both onli...
+2025-09-02 01:50:31,777 - INFO - Attempting to get prediction for description: You are a business expense analyst. Here are the expenses to analyze:
+
+- both online and offline mar...
+2025-09-02 01:50:31,777 - INFO - Using model: llama3.2:latest
+2025-09-02 01:50:31,777 - INFO - Sending request to Ollama
+2025-09-02 01:50:34,687 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-09-02 01:50:34,687 - INFO - Received response from Ollama
+2025-09-02 01:50:34,687 - INFO - AI Response: **Analysis Report**
+
+**Summary of Spending Patterns:**
+The expenses are categorized into Marketing, Travel, Office, and Operations. There is a significant overlap between Marketing and Travel, with bo...
+2025-09-02 01:50:34,687 - INFO - Sent response to ('127.0.0.1', 64376)
