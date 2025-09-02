@@ -12,8 +12,6 @@
 - jcommon-jar file
 - flatlaf-jar file
 
-## Step-by-Step Setup
-
 ##🚀 Clone git repo
 ```bash
 git clone https://github.com/anupchaudharyy/Java-Project-Expense-Tracker.git
