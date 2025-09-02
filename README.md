@@ -14,6 +14,11 @@
 
 ## Step-by-Step Setup
 
+##🚀 Clone git repo
+```bash
+git clone https://github.com/anupchaudharyy/Java-Project-Expense-Tracker.git
+```
+
 ### 1. Database Setup
 -- Create database and tables
 ```bash
