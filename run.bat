@@ -21,6 +21,6 @@ echo.
 echo ========================================
 echo Starting Smart Expense Tracker application...
 echo ========================================
-java -cp "bin;lib/*" com.expensetracker.main.ExpenseTrackerApp
+java --enable-native-access=ALL-UNNAMED -cp "bin;lib/*" com.expensetracker.main.ExpenseTrackerApp
 
 pause

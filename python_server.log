@@ -1,29 +1,92 @@
-2025-09-02 01:49:18,732 - INFO - Ollama server started on localhost:5000
-2025-09-02 01:49:55,714 - INFO - Connection from ('127.0.0.1', 64369)
-2025-09-02 01:49:55,715 - INFO - Received from ('127.0.0.1', 64369): {"description":"You are a business expense analyst. Here are the expenses to analyze:\n\n- both onli...
-2025-09-02 01:49:55,715 - INFO - Attempting to get prediction for description: You are a business expense analyst. Here are the expenses to analyze:
+2025-09-02 22:38:42,861 - INFO - Ollama server started on localhost:5000
+2025-09-03 03:58:38,023 - INFO - Connection from ('127.0.0.1', 57378)
+2025-09-03 03:58:38,028 - INFO - Received from ('127.0.0.1', 57378): {"description":"You are a business expense analyst. Here are the expenses to analyze:\n\n- Delivery ...
+2025-09-03 03:58:38,029 - INFO - Attempting to get prediction for description: You are a business expense analyst. Here are the expenses to analyze:
 
-- both online and offline mar...
-2025-09-02 01:49:55,715 - INFO - Using model: llama3.2:latest
-2025-09-02 01:49:55,715 - INFO - Sending request to Ollama
-2025-09-02 01:50:01,770 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2025-09-02 01:50:01,772 - INFO - Received response from Ollama
-2025-09-02 01:50:01,772 - INFO - AI Response: **Expense Analysis Report**
+- Delivery van fuel and maint...
+2025-09-03 03:58:38,029 - INFO - Using model: llama3.2:latest
+2025-09-03 03:58:38,029 - INFO - Sending request to Ollama
+2025-09-03 03:58:46,235 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-09-03 03:58:46,239 - INFO - Received response from Ollama
+2025-09-03 03:58:46,239 - INFO - AI Response: **Expense Analysis Summary**
+
+The provided expenses represent the operating costs for a business. Here's a brief analysis:
+
+* Total Expenses: $20,250.00
+* Spending Patterns:
+	+ Staff Salary (45% of to...
+2025-09-03 03:58:46,240 - INFO - Sent response to ('127.0.0.1', 57378)
+2025-09-03 03:59:06,975 - INFO - Connection from ('127.0.0.1', 57578)
+2025-09-03 03:59:06,976 - INFO - Received from ('127.0.0.1', 57578): {"description":"You are a business expense analyst. Here are the expenses to analyze:\n\n- Delivery ...
+2025-09-03 03:59:06,976 - INFO - Attempting to get prediction for description: You are a business expense analyst. Here are the expenses to analyze:
+
+- Delivery van fuel and maint...
+2025-09-03 03:59:06,976 - INFO - Using model: llama3.2:latest
+2025-09-03 03:59:06,976 - INFO - Sending request to Ollama
+2025-09-03 03:59:10,183 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-09-03 03:59:10,192 - INFO - Received response from Ollama
+2025-09-03 03:59:10,192 - INFO - AI Response: **Expense Analysis Report**
 
 **Summary of Spending Patterns:**
-The analyzed expenses show a mix of marketing, travel, office-related costs, and operational expenditures. Notably, the majority of expen...
-2025-09-02 01:50:01,772 - INFO - Sent response to ('127.0.0.1', 64369)
-2025-09-02 01:50:31,776 - INFO - Connection from ('127.0.0.1', 64376)
-2025-09-02 01:50:31,777 - INFO - Received from ('127.0.0.1', 64376): {"description":"You are a business expense analyst. Here are the expenses to analyze:\n\n- both onli...
-2025-09-02 01:50:31,777 - INFO - Attempting to get prediction for description: You are a business expense analyst. Here are the expenses to analyze:
+The company has a mix of fixed and variable expenses. The largest share of the expenditure is allocated to staff salary, indicating a sig...
+2025-09-03 03:59:10,192 - INFO - Sent response to ('127.0.0.1', 57578)
+2025-09-03 03:59:18,266 - INFO - Connection from ('127.0.0.1', 61525)
+2025-09-03 03:59:18,267 - INFO - Received from ('127.0.0.1', 61525): {"description":"You are a business expense analyst. Here are the expenses to analyze:\n\n- Delivery ...
+2025-09-03 03:59:18,267 - INFO - Attempting to get prediction for description: You are a business expense analyst. Here are the expenses to analyze:
 
-- both online and offline mar...
-2025-09-02 01:50:31,777 - INFO - Using model: llama3.2:latest
-2025-09-02 01:50:31,777 - INFO - Sending request to Ollama
-2025-09-02 01:50:34,687 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
-2025-09-02 01:50:34,687 - INFO - Received response from Ollama
-2025-09-02 01:50:34,687 - INFO - AI Response: **Analysis Report**
+- Delivery van fuel and maint...
+2025-09-03 03:59:18,267 - INFO - Using model: llama3.2:latest
+2025-09-03 03:59:18,267 - INFO - Sending request to Ollama
+2025-09-03 03:59:20,849 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-09-03 03:59:20,858 - INFO - Received response from Ollama
+2025-09-03 03:59:20,858 - INFO - AI Response: **Expense Analysis Summary**
 
-**Summary of Spending Patterns:**
-The expenses are categorized into Marketing, Travel, Office, and Operations. There is a significant overlap between Marketing and Travel, with bo...
-2025-09-02 01:50:34,687 - INFO - Sent response to ('127.0.0.1', 64376)
+The total expense for the analyzed period is $16,500.00.
+
+**Spending Patterns:**
+- The majority of expenses (75%) are attributed to staff salaries.
+- Packaging materials ...
+2025-09-03 03:59:20,858 - INFO - Sent response to ('127.0.0.1', 61525)
+2025-09-03 04:04:25,486 - INFO - Connection from ('127.0.0.1', 60337)
+2025-09-03 04:04:25,508 - INFO - Received from ('127.0.0.1', 60337): {"description":"You are a friendly and insightful financial analyst AI assistant. \U0001f916\nYour goal is to...
+2025-09-03 04:04:25,513 - INFO - Attempting to get prediction for description: You are a friendly and insightful financial analyst AI assistant. \U0001f916
+Your goal is to provide clear, c...
+2025-09-03 04:04:25,514 - INFO - Using model: llama3.2:latest
+2025-09-03 04:04:25,514 - INFO - Sending request to Ollama
+2025-09-03 04:04:29,498 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-09-03 04:04:29,499 - INFO - Received response from Ollama
+2025-09-03 04:04:29,499 - INFO - AI Response: \U0001f4ca **Spending Summary**
+
+Let's dive into the recent expenses and explore what they reveal about our spending patterns \U0001f914. Here's a brief summary of the overall spending:
+
+Total Expenses: $12,000
+Breakdo...
+2025-09-03 04:04:29,515 - INFO - Sent response to ('127.0.0.1', 60337)
+2025-09-03 04:04:47,209 - INFO - Connection from ('127.0.0.1', 60348)
+2025-09-03 04:04:47,209 - INFO - Received from ('127.0.0.1', 60348): {"description":"You are a friendly and insightful financial analyst AI assistant. \U0001f916\nYour goal is to...
+2025-09-03 04:04:47,209 - INFO - Attempting to get prediction for description: You are a friendly and insightful financial analyst AI assistant. \U0001f916
+Your goal is to provide clear, c...
+2025-09-03 04:04:47,209 - INFO - Using model: llama3.2:latest
+2025-09-03 04:04:47,209 - INFO - Sending request to Ollama
+2025-09-03 04:04:51,453 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-09-03 04:04:51,453 - INFO - Received response from Ollama
+2025-09-03 04:04:51,454 - INFO - AI Response: As your friendly financial analyst AI assistant, I'd like to provide a detailed analysis of your recent expenses \U0001f4ca.
+
+**Spending Summary \U0001f4c8**
+
+The overall spending amount for the given period is $16,500...
+2025-09-03 04:04:51,454 - INFO - Sent response to ('127.0.0.1', 60348)
+2025-09-03 04:22:17,434 - INFO - Connection from ('127.0.0.1', 59237)
+2025-09-03 04:22:17,436 - INFO - Received from ('127.0.0.1', 59237): {"description":"You are a friendly and insightful financial analyst AI assistant. \U0001f916\nYour goal is to...
+2025-09-03 04:22:17,436 - INFO - Attempting to get prediction for description: You are a friendly and insightful financial analyst AI assistant. \U0001f916
+Your goal is to provide clear, c...
+2025-09-03 04:22:17,436 - INFO - Using model: llama3.2:latest
+2025-09-03 04:22:17,436 - INFO - Sending request to Ollama
+2025-09-03 04:22:24,847 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-09-03 04:22:24,857 - INFO - Received response from Ollama
+2025-09-03 04:22:24,857 - INFO - AI Response: I'd be happy to help you analyze your recent expenses! \U0001f916
+
+**Spending Summary \U0001f4c8**
+
+Our analysis reveals that the majority of your expenses are focused on staffing and packaging. The delivery van fuel a...
+2025-09-03 04:22:24,857 - INFO - Sent response to ('127.0.0.1', 59237)

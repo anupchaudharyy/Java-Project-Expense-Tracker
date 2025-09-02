@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 import com.expensetracker.model.User;
 import com.expensetracker.model.Expense;
+import com.expensetracker.model.Income;
 import com.expensetracker.service.ExpenseService;
+import com.expensetracker.service.IncomeService;
 import com.expensetracker.service.ReportService;
 import com.expensetracker.utils.ExceptionHandler;
 
@@ -18,12 +20,13 @@ public class ReportsPanel extends JPanel {
     
     private User currentUser;
     private ExpenseService expenseService;
+    private IncomeService incomeService;
     private ReportService reportService;
     
     private JComboBox<String> monthCombo;
     private JComboBox<Integer> yearCombo;
     private MyChartPanel chartPanel;
-    private JLabel totalLabel;
+    private JLabel summaryLabel;
 
     private final Color PRIMARY_COLOR = new Color(40, 44, 52);
     private final Color SECONDARY_COLOR = new Color(33, 37, 43);
@@ -31,9 +34,10 @@ public class ReportsPanel extends JPanel {
     private final Color TEXT_COLOR = new Color(255, 255, 255);
     private final Font GLOBAL_FONT = new Font("Roboto", Font.PLAIN, 14);
 
-    public ReportsPanel(User user, ExpenseService expenseService) {
+    public ReportsPanel(User user, ExpenseService expenseService, IncomeService incomeService) {
         this.currentUser = user;
         this.expenseService = expenseService;
+        this.incomeService = incomeService;
         this.reportService = new ReportService();
         
         setOpaque(false);
@@ -74,9 +78,9 @@ public class ReportsPanel extends JPanel {
         styleButton(jsonReportButton);
         jsonReportButton.addActionListener(e -> showJsonReport());
 
-        totalLabel = new JLabel("Total Expenses: $0.00");
-        totalLabel.setForeground(TEXT_COLOR);
-        totalLabel.setFont(GLOBAL_FONT);
+        summaryLabel = new JLabel("Total Income: $0.00 | Total Expenses: $0.00 | Net: $0.00");
+        summaryLabel.setForeground(TEXT_COLOR);
+        summaryLabel.setFont(GLOBAL_FONT);
 
         controlPanel.add(new JLabel("Month:"));
         controlPanel.add(monthCombo);
@@ -84,7 +88,7 @@ public class ReportsPanel extends JPanel {
         controlPanel.add(yearCombo);
         controlPanel.add(generateButton);
         controlPanel.add(jsonReportButton);
-        controlPanel.add(totalLabel);
+        controlPanel.add(summaryLabel);
 
         return controlPanel;
     }
@@ -107,19 +111,30 @@ public class ReportsPanel extends JPanel {
         int month = monthCombo.getSelectedIndex() + 1;
         int year = (int) yearCombo.getSelectedItem();
 
-        SwingWorker<Map<String, BigDecimal>, Void> worker = new SwingWorker<>() {
+        SwingWorker<Void, Void> worker = new SwingWorker<>() {
+            private Map<String, BigDecimal> expenseSummary;
+            private Map<String, BigDecimal> incomeSummary;
+
             @Override
-            protected Map<String, BigDecimal> doInBackground() throws Exception {
-                return expenseService.getMonthlySummary(currentUser.getId(), year, month);
+            protected Void doInBackground() throws Exception {
+                expenseSummary = expenseService.getMonthlySummary(currentUser.getId(), year, month);
+                incomeSummary = incomeService.getMonthlySummary(currentUser.getId(), year, month);
+                return null;
             }
 
             @Override
             protected void done() {
                 try {
-                    Map<String, BigDecimal> summary = get();
-                    chartPanel.updateChartData(summary);
-                    BigDecimal total = summary.values().stream().reduce(BigDecimal.ZERO, BigDecimal::add);
-                    totalLabel.setText(String.format("Total Expenses: $%.2f", total));
+                    get(); // Handles exceptions from doInBackground
+                    chartPanel.updateChartData(incomeSummary, expenseSummary);
+                    
+                    BigDecimal totalExpenses = expenseSummary.values().stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+                    BigDecimal totalIncome = incomeSummary.values().stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+                    BigDecimal net = totalIncome.subtract(totalExpenses);
+                    
+                    summaryLabel.setText(String.format(
+                        "Total Income: $%.2f | Total Expenses: $%.2f | Net: $%.2f",
+                        totalIncome, totalExpenses, net));
                 } catch (Exception e) {
                     ExceptionHandler.handleDatabaseException(e, "Failed to generate report");
                 }
@@ -133,7 +148,8 @@ public class ReportsPanel extends JPanel {
             @Override
             protected String doInBackground() throws Exception {
                 List<Expense> expenses = expenseService.getExpensesForUser(currentUser);
-                return reportService.generateJsonReport(expenses);
+                List<Income> incomes = incomeService.getIncomesForUser(currentUser);
+                return reportService.generateJsonReport(expenses, incomes);
             }
 
             @Override
@@ -158,7 +174,6 @@ public class ReportsPanel extends JPanel {
     }
     
     public void showMonthlyReport() {
-        // This might be redundant if refreshData is called on tab selection
         generateReport();
     }
 

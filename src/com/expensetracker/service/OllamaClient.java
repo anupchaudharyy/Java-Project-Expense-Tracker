@@ -140,7 +140,9 @@ public class OllamaClient {
         }
 
         StringBuilder prompt = new StringBuilder();
-        prompt.append("You are a business expense analyst. Here are the expenses to analyze:\n\n");
+        prompt.append("You are a friendly and insightful financial analyst AI assistant. 🤖\n");
+        prompt.append("Your goal is to provide clear, concise, and detailed analysis of business expenses, using emojis to make the report engaging.\n\n");
+        prompt.append("Here are the recent expenses to analyze:\n\n");
 
         // Group expenses by category for better analysis
         Map<String, BigDecimal> categoryTotals = new HashMap<>();
@@ -155,11 +157,11 @@ public class OllamaClient {
                 expense.getDescription(), expense.getAmount(), expense.getCategoryName()));
         }
 
-        prompt.append("\nAnalyze these expenses and provide:\n");
-        prompt.append("1. A brief summary of spending patterns\n");
-        prompt.append("2. The highest spending category\n");
-        prompt.append("3. 2-3 specific cost optimization suggestions\n");
-        prompt.append("\nFormat your response clearly and be concise.");
+        prompt.append("\n\nPlease provide a detailed analysis with the following structure:\n\n");
+        prompt.append("1.  **Spending Summary** 📈: A brief, insightful summary of the overall spending patterns.\n");
+        prompt.append("2.  **Top Spending Category** 🏆: Identify the category with the highest spending and the total amount spent in it.\n");
+        prompt.append("3.  **Cost-Saving Suggestions** 💡: Provide 2-3 specific, actionable suggestions for optimizing costs. Explain the reasoning behind each suggestion.\n\n");
+        prompt.append("Your tone should be professional yet encouraging. Format your response clearly for easy readability.");
 
         return prompt.toString();
     }

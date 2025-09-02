@@ -45,35 +45,75 @@ public class RegistrationDialog extends JDialog {
     private void setupComponents() {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(15, 25, 15, 25);
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         JLabel titleLabel = new JLabel("Create Your Account");
         titleLabel.setFont(new Font("Roboto", Font.BOLD, 28));
         titleLabel.setForeground(TEXT_COLOR);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        gbc.gridwidth = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         add(titleLabel, gbc);
 
-        usernameField = new JTextField(20);
-        styleTextField(usernameField, "Username");
+        // Username
+        gbc.gridwidth = 1;
+        gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.anchor = GridBagConstraints.EAST;
+        JLabel userLabel = new JLabel("Username:");
+        userLabel.setForeground(TEXT_COLOR);
+        userLabel.setFont(new Font("Roboto", Font.BOLD, 14));
+        add(userLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        usernameField = new JTextField(15);
+        styleTextField(usernameField);
         add(usernameField, gbc);
-        
-        passwordField = new JPasswordField(20);
-        styleTextField(passwordField, "Password");
+
+        // Password
+        gbc.gridy = 2;
+        gbc.gridx = 0;
+        gbc.anchor = GridBagConstraints.EAST;
+        JLabel passLabel = new JLabel("Password:");
+        passLabel.setForeground(TEXT_COLOR);
+        passLabel.setFont(new Font("Roboto", Font.BOLD, 14));
+        add(passLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        passwordField = new JPasswordField(15);
+        styleTextField(passwordField);
         add(passwordField, gbc);
 
-        confirmPasswordField = new JPasswordField(20);
-        styleTextField(confirmPasswordField, "Confirm Password");
+        // Confirm Password
+        gbc.gridy = 3;
+        gbc.gridx = 0;
+        gbc.anchor = GridBagConstraints.EAST;
+        JLabel confirmPassLabel = new JLabel("Confirm Password:");
+        confirmPassLabel.setForeground(TEXT_COLOR);
+        confirmPassLabel.setFont(new Font("Roboto", Font.BOLD, 14));
+        add(confirmPassLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        confirmPasswordField = new JPasswordField(15);
+        styleTextField(confirmPasswordField);
         add(confirmPasswordField, gbc);
-        
+
+        // Register Button
+        gbc.gridy = 4;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
         registerButton = new JButton("REGISTER");
         styleButton(registerButton);
         add(registerButton, gbc);
     }
 
-    private void styleTextField(JTextField field, String placeholder) {
+    private void styleTextField(JTextField field) {
         field.setFont(new Font("Roboto", Font.PLAIN, 14));
         field.setBackground(TEXT_FIELD_BG);
         field.setForeground(TEXT_COLOR);
@@ -92,6 +132,9 @@ public class RegistrationDialog extends JDialog {
     
     private void setupEventHandlers() {
         registerButton.addActionListener(e -> performRegistration());
+        
+        usernameField.addActionListener(e -> passwordField.requestFocusInWindow());
+        passwordField.addActionListener(e -> confirmPasswordField.requestFocusInWindow());
         confirmPasswordField.addActionListener(e -> performRegistration());
     }
     

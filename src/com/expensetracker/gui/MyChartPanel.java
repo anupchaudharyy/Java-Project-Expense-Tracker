@@ -4,10 +4,10 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
-
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.ChartUtils;
 
 import java.awt.BorderLayout;
@@ -16,11 +16,13 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 
 public class MyChartPanel extends JPanel {
 
     private JFreeChart chart; 
-    private final DefaultPieDataset dataset = new DefaultPieDataset();
+    private final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
     public MyChartPanel() {
         initUI();
@@ -34,10 +36,13 @@ public class MyChartPanel extends JPanel {
         add(chartPanel, BorderLayout.CENTER);
     }
 
-    private JFreeChart createChart(PieDataset dataset) {
-        JFreeChart chart = ChartFactory.createPieChart(
-                "Expense Distribution",  // chart title
+    private JFreeChart createChart(DefaultCategoryDataset dataset) {
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Income vs Expense",  // chart title
+                "Category",
+                "Amount",
                 dataset,             // data
+                PlotOrientation.VERTICAL,
                 true,                // include legend
                 true,
                 false);
@@ -47,25 +52,42 @@ public class MyChartPanel extends JPanel {
         chart.getLegend().setBackgroundPaint(new Color(0,0,0,0));
         chart.getLegend().setItemPaint(Color.WHITE);
 
-        PiePlot plot = (PiePlot) chart.getPlot();
+        CategoryPlot plot = chart.getCategoryPlot();
         plot.setBackgroundPaint(new Color(0,0,0,0));
-        plot.setLabelGenerator(null); // Hide labels on slices
         plot.setOutlineVisible(false);
+        plot.getDomainAxis().setLabelPaint(Color.WHITE);
+        plot.getDomainAxis().setTickLabelPaint(Color.WHITE);
+        plot.getRangeAxis().setLabelPaint(Color.WHITE);
+        plot.getRangeAxis().setTickLabelPaint(Color.WHITE);
         plot.setNoDataMessage("No data available for the selected period.");
+        
+        BarRenderer renderer = (BarRenderer) plot.getRenderer();
+        renderer.setSeriesPaint(0, new Color(0, 255, 0, 180)); // Income
+        renderer.setSeriesPaint(1, new Color(255, 0, 0, 180)); // Expense
 
         return chart;
     }
 
-    public void updateChartData(Map<String, BigDecimal> data) {
+    public void updateChartData(Map<String, BigDecimal> incomeData, Map<String, BigDecimal> expenseData) {
         dataset.clear();
-        if (data != null && !data.isEmpty()) {
-            for (Map.Entry<String, BigDecimal> entry : data.entrySet()) {
-                dataset.setValue(entry.getKey(), entry.getValue());
-            }
-        } 
+        
+        Set<String> categories = new HashSet<>();
+        if (incomeData != null) {
+            categories.addAll(incomeData.keySet());
+        }
+        if (expenseData != null) {
+            categories.addAll(expenseData.keySet());
+        }
+
+        for (String category : categories) {
+            BigDecimal income = incomeData != null ? incomeData.getOrDefault(category, BigDecimal.ZERO) : BigDecimal.ZERO;
+            BigDecimal expense = expenseData != null ? expenseData.getOrDefault(category, BigDecimal.ZERO) : BigDecimal.ZERO;
+            dataset.addValue(income, "Income", category);
+            dataset.addValue(expense, "Expense", category);
+        }
     }
 
     public void saveChartAsPNG(File file) throws IOException {
-        ChartUtils.saveChartAsPNG(file, chart, 600, 400);
+        ChartUtils.saveChartAsPNG(file, chart, 800, 600);
     }
 }

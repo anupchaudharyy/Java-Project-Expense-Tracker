@@ -1,6 +1,5 @@
 
-from ollama import chat
-from ollama import ChatResponse
+from ollama import chat, ChatResponse
 import socket
 import json
 import threading
@@ -120,7 +119,9 @@ class OllamaServer:
             )
             
             logger.info("Received response from Ollama")
-            logger.info(f"AI Response: {response.message.content[:200]}...")  # Log first 200 chars of response
+
+             # Log first 200 chars of response
+            logger.info(f"AI Response: {response.message.content[:200]}...") #type: ignore
             return response.message.content
             
         except Exception as e:

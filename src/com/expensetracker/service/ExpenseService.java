@@ -44,9 +44,7 @@ public class ExpenseService {
         }
         
         
-        if (amount.compareTo(new BigDecimal("10000.00")) > 0) {
-            throw new ValidationException("Expense amount cannot exceed $10,000");
-        }
+        
     }
     
 

@@ -1,6 +1,7 @@
 package com.expensetracker.service;
 
 import com.expensetracker.model.Expense;
+import com.expensetracker.model.Income;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -9,8 +10,8 @@ import java.util.List;
 public class ReportService {
 
     @SuppressWarnings("unchecked")
-    public String generateJsonReport(List<Expense> expenses) {
-        JSONArray jsonArray = new JSONArray();
+    public String generateJsonReport(List<Expense> expenses, List<Income> incomes) {
+        JSONArray expenseArray = new JSONArray();
         for (Expense expense : expenses) {
             JSONObject expenseJson = new JSONObject();
             expenseJson.put("id", expense.getId());
@@ -18,11 +19,23 @@ public class ReportService {
             expenseJson.put("category", expense.getCategoryName());
             expenseJson.put("amount", expense.getAmount().doubleValue());
             expenseJson.put("description", expense.getDescription());
-            jsonArray.add(expenseJson);
+            expenseArray.add(expenseJson);
+        }
+
+        JSONArray incomeArray = new JSONArray();
+        for (Income income : incomes) {
+            JSONObject incomeJson = new JSONObject();
+            incomeJson.put("id", income.getId());
+            incomeJson.put("date", income.getIncomeDate().toString());
+            incomeJson.put("category", income.getCategoryName());
+            incomeJson.put("amount", income.getAmount().doubleValue());
+            incomeJson.put("description", income.getDescription());
+            incomeArray.add(incomeJson);
         }
 
         JSONObject report = new JSONObject();
-        report.put("expenses", jsonArray);
+        report.put("incomes", incomeArray);
+        report.put("expenses", expenseArray);
 
         return prettyPrintJson(report.toJSONString());
     }
@@ -74,3 +87,4 @@ public class ReportService {
         }
     }
 }
+

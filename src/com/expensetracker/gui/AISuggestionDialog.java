@@ -8,13 +8,10 @@ import java.util.List;
 import com.expensetracker.model.Expense;
 import com.expensetracker.service.OllamaClient;
 
-/**
- * Custom AI Suggestion Dialog with improved UI design
- * Provides a larger, clearer interface for displaying AI insights
- */
+
 public class AISuggestionDialog extends JDialog {
     
-    // UI Colors and Fonts
+
     private static final Color PRIMARY_COLOR = new Color(25, 25, 112);
     private static final Color SECONDARY_COLOR = new Color(135, 206, 250);
     private static final Color ACCENT_COLOR = new Color(255, 255, 255);
@@ -32,25 +29,23 @@ public class AISuggestionDialog extends JDialog {
     private JButton refreshButton;
     private JProgressBar progressBar;
     private JLabel statusLabel;
-    private List<Expense> expenses; // Store expenses for refresh functionality
+    private List<Expense> expenses; 
     
     public AISuggestionDialog(JFrame parent, List<Expense> expenses) {
         super(parent, "AI Expense Analysis", true);
-        this.expenses = expenses; // Store expenses for refresh functionality
+        this.expenses = expenses; 
         initializeDialog();
         loadAIInsight(expenses);
     }
     
-    /**
-     * Initialize the dialog with improved UI design
-     */
+
     private void initializeDialog() {
         setSize(800, 600);
         setLocationRelativeTo(getOwner());
         setResizable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
-        // Add keyboard shortcut for closing
+        
         getRootPane().registerKeyboardAction(
             e -> dispose(),
             "Close",
@@ -58,7 +53,6 @@ public class AISuggestionDialog extends JDialog {
             JComponent.WHEN_IN_FOCUSED_WINDOW
         );
         
-        // Main panel with gradient background
         JPanel mainPanel = new GradientPanel(new Color[]{BACKGROUND_COLOR, new Color(240, 242, 245)}, 0);
         mainPanel.setLayout(new BorderLayout(15, 15));
         mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -78,9 +72,7 @@ public class AISuggestionDialog extends JDialog {
         setContentPane(mainPanel);
     }
     
-    /**
-     * Create the header panel with title and icon
-     */
+   
     private JPanel createHeaderPanel() {
         JPanel headerPanel = new JPanel(new BorderLayout(10, 0));
         headerPanel.setOpaque(false);

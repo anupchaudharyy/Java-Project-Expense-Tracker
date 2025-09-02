@@ -3,7 +3,7 @@ package com.expensetracker.gui;
 import com.expensetracker.model.Expense;
 import com.expensetracker.model.User;
 import com.expensetracker.service.ExpenseService;
-import com.expensetracker.service.OllamaClient;
+import com.expensetracker.service.IncomeService;
 import com.expensetracker.utils.BackgroundSaver;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -17,10 +17,12 @@ public class MainFrame extends JFrame {
     
     private User currentUser;
     private ExpenseService expenseService;
+    private IncomeService incomeService;
     private BackgroundSaver backgroundSaver;
     
     private JTabbedPane tabbedPane;
     private ExpensePanel expensePanel;
+    private IncomePanel incomePanel;
     private ReportsPanel reportsPanel;
     private JLabel statusLabel;
 
@@ -33,6 +35,7 @@ public class MainFrame extends JFrame {
     public MainFrame(User user) {
         this.currentUser = user;
         this.expenseService = new ExpenseService();
+        this.incomeService = new IncomeService();
         this.backgroundSaver = new BackgroundSaver(expenseService);
         
         initializeGUI();
@@ -95,6 +98,17 @@ public class MainFrame extends JFrame {
 
         menuBar.add(expensesMenu);
 
+        JMenu incomeMenu = new JMenu("Income");
+        incomeMenu.setMnemonic('I');
+        incomeMenu.setFont(GLOBAL_FONT);
+        incomeMenu.setForeground(TEXT_COLOR);
+
+        JMenuItem addIncomeItem = new JMenuItem("Add Income");
+        addIncomeItem.addActionListener(e -> incomePanel.showAddIncomeDialog());
+        incomeMenu.add(addIncomeItem);
+
+        menuBar.add(incomeMenu);
+
         JMenu aboutMenu = new JMenu("About");
         aboutMenu.setMnemonic('A');
         aboutMenu.setFont(GLOBAL_FONT);
@@ -116,8 +130,8 @@ public class MainFrame extends JFrame {
         JButton aiSuggestionButton = new JButton("🤖 Get AI Suggestion");
         
         // Style the AI suggestion button to make it more prominent
-        aiSuggestionButton.setFont(new Font("Roboto", Font.BOLD, 14));
-        aiSuggestionButton.setBackground(new Color(25, 25, 112));
+        aiSuggestionButton.setFont(new Font("Roboto", Font.BOLD, 20));
+        aiSuggestionButton.setBackground(new Color(30, 35, 124));
         aiSuggestionButton.setForeground(Color.WHITE);
         aiSuggestionButton.setFocusPainted(false);
         aiSuggestionButton.setBorder(BorderFactory.createCompoundBorder(
@@ -160,9 +174,11 @@ public class MainFrame extends JFrame {
 
         // Panels
         expensePanel = new ExpensePanel(currentUser, expenseService);
-        reportsPanel = new ReportsPanel(currentUser, expenseService);
+        incomePanel = new IncomePanel(currentUser, incomeService);
+        reportsPanel = new ReportsPanel(currentUser, expenseService, incomeService);
 
-        tabbedPane.addTab("Dashboard", new ImageIcon("path/to/dashboard_icon.png"), expensePanel, "View and manage expenses");
+        tabbedPane.addTab("Expense", new ImageIcon("path/to/dashboard_icon.png"), expensePanel, "View and manage expenses");
+        tabbedPane.addTab("Income", new ImageIcon("path/to/income_icon.png"), incomePanel, "View and manage income");
         tabbedPane.addTab("Financial Reports", new ImageIcon("path/to/reports_icon.png"), reportsPanel, "Analyze your spending");
 
         // Status Bar
