@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 # Smart Expense Tracker 
-
 
 ### Software Requirements
 - **Java Development Kit (JDK) 17 or higher**
@@ -88,7 +86,7 @@ If the AI suggestion feature isn't working:
 3. **Check Ports**: Verify port 5000 is available and not blocked by firewall
 4. **Check Logs**: Review `python_server.log` for detailed error messages
 
-=======
+
 # Java-Project-Expense-Tracker
 This is AI powered java swing desktop application `Expense Tracker System` that uses ollama python library for AI integration locally.
->>>>>>> e074a051a5c33d9962b274508e3e33eae07a896d
+
